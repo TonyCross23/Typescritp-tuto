@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./src/Server/todo.ts",
+    "dev": "nodemon ./src/Server/todo.ts",
+    "build": "tsc --project tsconfig.json"
   },
   "keywords": [],
   "author": "",
