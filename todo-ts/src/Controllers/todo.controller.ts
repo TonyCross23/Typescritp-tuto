@@ -25,6 +25,20 @@ class todoController {
       });
     }
   };
+
+  //get all todos
+  getTodos = async (req: Request, res: Response) => {
+    const todos = await todoServices.getAllTodo();
+    res.json(todos).status(200);
+  };
+
+  //get todo with id
+  getTodoId = async (req: Request, res: Response) => {
+    //get id from parameter
+    const id = req.params.id;
+    const todo = await todoServices.getTodoById(id);
+    res.json(todo);
+  };
 }
 
 export const TodoController = new todoController();
