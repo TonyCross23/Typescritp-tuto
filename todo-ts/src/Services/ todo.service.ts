@@ -31,6 +31,34 @@ export class todoService {
       console.log(error);
     }
   }
+
+  //update todo
+  async updateTodo(id: string, data: any) {
+    try {
+      const todoz = await Todo.findByIdAndUpdate({ _id: id }, data, {
+        new: true,
+      });
+      if (!todoz) {
+        return "todo not found";
+      }
+      return todoz;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  //delete todo
+  async deleteTodo(id: string) {
+    try {
+      const todo = await Todo.findByIdAndDelete(id);
+      if (!todo) {
+        return "todo not found";
+      }
+      return todo;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 export const todoServices = new todoService();

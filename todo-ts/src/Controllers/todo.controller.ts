@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { TodoSchemaValidation } from "../Models/todo";
 import { todoServices } from "../Services/ todo.service";
+import { date } from "joi";
 
 class todoController {
   //add todo controller
@@ -38,6 +39,23 @@ class todoController {
     const id = req.params.id;
     const todo = await todoServices.getTodoById(id);
     res.json(todo);
+  };
+
+  //update todo
+  updateTodo = async (req: Request, res: Response) => {
+    const id = req.params.id;
+    const todo = await todoServices.updateTodo(id, req.body);
+    res.status(201).json({
+      message: "Todo updated successfull",
+      data: todo,
+    });
+  };
+
+  //delete todo
+  deleteTodo = async (req: Request, res: Response) => {
+    const id = req.params.id;
+    await todoServices.deleteTodo(id);
+    res.json("Todo deleted succefully");
   };
 }
 
