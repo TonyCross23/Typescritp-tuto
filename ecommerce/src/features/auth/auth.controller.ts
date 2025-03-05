@@ -7,6 +7,7 @@ import { BadRequestException } from "../../exceptions/bad-request";
 import { ErrorCode } from "../../exceptions/root";
 import { UnprocessableEntity } from "../../exceptions/validation";
 import { signupSchema } from "./auth.vaidation";
+import { NotFoundException } from "../../exceptions/not-found";
 
 export const signUp = async (
   req: Request,
@@ -17,9 +18,7 @@ export const signUp = async (
   const { name, email, password, profile } = req.body;
   let user = await prisma.user.findFirst({ where: { email } });
   if (user) {
-    next(
-      new BadRequestException("User already exists", ErrorCode.ALREADY_EXISTS)
-    );
+    new BadRequestException("User already exists", ErrorCode.ALREADY_EXISTS);
   }
   user = await prisma.user.create({
     data: {
@@ -34,25 +33,28 @@ export const signUp = async (
 
 export const signin = async (req: Request, res: Response) => {
   const { email, password } = req.body;
-  try {
-    let user = await prisma.user.findFirst({
-      where: { email },
-    });
-    if (!user) {
-      throw new Error("User does not exists");
-    }
-    if (!compareSync(password, user.password)) {
-      throw new Error("Incorrect email or password");
-    }
-    const token = jwt.sign({ userId: user.id }, JWT_SECRET);
-    res.status(200).json({
-      user: {
-        name: user.name,
-        email: user.email,
-      },
-      token,
-    });
-  } catch (error) {
-    console.log(error);
+  let user = await prisma.user.findFirst({
+    where: { email },
+  });
+  if (!user) {
+    throw new NotFoundException("User does not exists", ErrorCode.NOT_FOUND);
   }
+  if (!compareSync(password, user.password)) {
+    throw new BadRequestException(
+      "Incorrect email or password",
+      ErrorCode.BAD_REQUEST
+    );
+  }
+  const token = jwt.sign({ userId: user.id }, JWT_SECRET);
+  res.status(200).json({
+    user: {
+      name: user.name,
+      email: user.email,
+    },
+    token,
+  });
+};
+
+export const me = async (req: Request, res: Response) => {
+  res.json(req.user);
 };

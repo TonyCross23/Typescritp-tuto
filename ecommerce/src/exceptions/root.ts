@@ -26,4 +26,5 @@ export enum ErrorCode {
   UNAUTHORIZED = 401,
   VALIDATION = 422,
   INTERNAL_EXCEPTION = 500,
+  BAD_REQUEST = 400,
 }
