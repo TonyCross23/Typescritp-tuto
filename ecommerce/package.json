@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node --files src/index.ts "
+    "dev": "ts-node --files src/index.ts ",
+    "start": "nodemon"
   },
   "keywords": [],
   "author": "",
