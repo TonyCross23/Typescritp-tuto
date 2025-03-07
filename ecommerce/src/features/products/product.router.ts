@@ -1,6 +1,12 @@
 import { errorHandler } from "../../error-handler";
 import { Router } from "express";
-import { createProduct, updateProduct } from "./product.controller";
+import {
+  createProduct,
+  deleteProduct,
+  getProductById,
+  listAllProduct,
+  updateProduct,
+} from "./product.controller";
 import { authMiddleware } from "../../middlewares/auth";
 import adminMiddleware from "../../middlewares/admin";
 
@@ -15,6 +21,13 @@ productRouter.put(
   "/:id",
   [authMiddleware, adminMiddleware],
   errorHandler(updateProduct)
+);
+productRouter.get("/", [authMiddleware], errorHandler(listAllProduct));
+productRouter.get("/:id", [authMiddleware], errorHandler(getProductById));
+productRouter.delete(
+  "/:id",
+  [authMiddleware, adminMiddleware],
+  errorHandler(deleteProduct)
 );
 
 export default productRouter;
