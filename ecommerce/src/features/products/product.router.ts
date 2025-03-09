@@ -5,6 +5,7 @@ import {
   deleteProduct,
   getProductById,
   listAllProduct,
+  searchProduct,
   updateProduct,
 } from "./product.controller";
 import { authMiddleware } from "../../middlewares/auth";
@@ -17,6 +18,7 @@ productRouter.post(
   [authMiddleware, adminMiddleware],
   errorHandler(createProduct)
 );
+productRouter.get("/search", [authMiddleware], errorHandler(searchProduct));
 productRouter.put(
   "/:id",
   [authMiddleware, adminMiddleware],

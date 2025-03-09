@@ -97,3 +97,39 @@ export const cancelOrder = async (req: Request, res: Response) => {
     throw new NotFoundException("Order not found", ErrorCode.NOT_FOUND);
   }
 };
+
+export const listAllOrders = async (req: Request, res: Response) => {
+  let whereClause = {};
+  const status = req.query.status;
+  if (status) {
+    whereClause = {
+      status,
+    };
+  }
+  const orders = await prisma.order.findMany({
+    where: whereClause,
+    skip: +(req.query.skip ?? 0),
+    take: 5,
+  });
+  res.status(200).json(orders);
+};
+
+export const changeStatus = async (req: Request, res: Response) => {
+  try {
+    const order = await prisma.order.update({
+      where: { id: +req.params.id },
+      data: {
+        status: req.body.status,
+      },
+    });
+    await prisma.orderEvent.create({
+      data: {
+        orderId: order.id,
+        status: req.body.status,
+      },
+    });
+    res.status(200).json(order);
+  } catch (error) {
+    throw new NotFoundException("Order not found", ErrorCode.NOT_FOUND);
+  }
+};

@@ -17,7 +17,7 @@ userRouter.get(
   errorHandler(getUserById)
 );
 userRouter.put(
-  "/:id/status",
+  "/:id/role",
   [authMiddleware, adminMiddleware],
   errorHandler(changeRole)
 );
