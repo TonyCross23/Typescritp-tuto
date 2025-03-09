@@ -4,6 +4,7 @@ import productRouter from "../features/products/product.router";
 import addressRouter from "../features/address/address.router";
 import cartRouter from "../features/cart_item/cartItem.router";
 import orderRouter from "../features/order/order.router";
+import userRouter from "../features/user/user.router";
 
 const router = Router();
 
@@ -12,5 +13,6 @@ router.use("/product", productRouter);
 router.use("/address", addressRouter);
 router.use("/cart", cartRouter);
 router.use("/orders", orderRouter);
+router.use("/user", userRouter);
 
 export default router;
