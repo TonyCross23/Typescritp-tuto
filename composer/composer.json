@@ -1,0 +1,20 @@
+{
+  "name": "tony/sms",
+  "authors": [
+    {
+      "name": "TonyCross23",
+      "email": "tonychamp40@gmail.com"
+    }
+  ],
+  "require": {
+    "illuminate/database": "^12.1"
+  },
+  "autoload": {
+    "files": [
+      "helper.php"
+    ],
+    "psr-4": {
+      "App\\": "src/"
+    }
+  }
+}
