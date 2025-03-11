@@ -1,6 +1,7 @@
 <?php
 namespace App\Utils;
 
+use App\Model\Student;
 use Illuminate\Database\Capsule\Manager as DB;
 
 class Database
@@ -30,13 +31,13 @@ class Database
 
     public function index()
     {
-        $students = DB::table("students")->get();
+        $students = Student::all();
         return $students;
     }
 
     public function destory($id)
     {
-        $result = DB::table('students')->where('id', '=', $id)->delete();
+        $result = Student::destroy($id);
         if ($result) {
             header("location: index.php");
         }
@@ -45,32 +46,22 @@ class Database
     public function store($data)
     {
 
-        $id = DB::table('students')->insertGetId([
-            'name'   => $data['name'],
-            'age'    => $data['age'],
-            'email'  => $data['email'],
-            'gender' => $data['gender'],
-        ]);
+        $student = Student::create($data);
 
-        if ($id) {
+        if ($student) {
             header("location: index.php");
         }
     }
 
     public function show($id)
     {
-        $student = DB::table('students')->where("id", $id)->first();
+        $student = Student::find($id);
         return $student;
     }
 
     public function update($data)
     {
-        $result = DB::table('students')->where('id', $data['id'])->update([
-            'name'   => $data['name'],
-            'age'    => $data['age'],
-            'email'  => $data['email'],
-            'gender' => $data['gender'],
-        ]);
+        $result = Student::where("id", $data['id'])->update($data);
 
         if ($result) {
             header("location: index.php");
