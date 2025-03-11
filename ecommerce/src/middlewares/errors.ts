@@ -7,9 +7,11 @@ export const errorMiddleware = (
   res: Response,
   next: NextFunction
 ) => {
-  res.status(error.statusCode).json({
-    message: error.message,
-    errorCode: error.errorCode,
-    errors: error.errors,
+  const statusCode = error.statusCode || 500; // ✅ Ensure a valid HTTP status code
+
+  res.status(statusCode).json({
+    message: error.message || "Something went wrong",
+    errorCode: error.errorCode || statusCode, // ✅ Set default errorCode
+    errors: error.errors || {},
   });
 };

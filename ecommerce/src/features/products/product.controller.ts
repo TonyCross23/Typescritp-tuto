@@ -2,11 +2,9 @@ import prisma from "../../database/prisma";
 import { Request, Response } from "express";
 import { NotFoundException } from "../../exceptions/not-found";
 import { ErrorCode } from "../../exceptions/root";
-import { date } from "zod";
 
 export const createProduct = async (req: Request, res: Response) => {
   //["tea", "hehe"] => "tea,hehe"
-
   const product = await prisma.product.create({
     data: {
       ...req.body,
