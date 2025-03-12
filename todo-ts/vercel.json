@@ -1,5 +1,0 @@
-{
-  "version": 2,
-  "builds": [{ "src": "dist/server/todo.js", "use": "@vercel/node" }],
-  "routes": [{ "src": "/(.*)", "dest": "dist/server/todo.js" }]
-}
