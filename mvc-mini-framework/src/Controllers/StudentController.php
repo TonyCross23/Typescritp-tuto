@@ -8,12 +8,6 @@ class StudentController
 {
 
     private $query, $post;
-    public function __construct()
-    {
-        $request     = Request::createFromGlobals();
-        $this->query = $request->query;
-        $this->post  = $request->request;
-    }
     public function index()
     {
         $students = Student::get();
@@ -22,44 +16,44 @@ class StudentController
 
     public function create()
     {
-        view("create.php");
+        return view("create.php");
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $student = Student::create($this->post->all());
+        $student = Student::create($request->request->all());
         if ($student) {
-            header("location: index");
+            return redirect("/index");
         }
     }
 
-    public function show()
+    public function show($id)
     {
-        $student = Student::find($this->query->get('id'));
-        view("show.php", ['student' => $student]);
+        $student = Student::find($id);
+        return view("show.php", ['student' => $student]);
     }
 
-    public function edit()
+    public function edit($id)
     {
-        $student = Student::find($this->query->get('id'));
-        view("edit.php", ["student" => $student]);
+        $student = Student::find($id);
+        return view("edit.php", ["student" => $student]);
     }
 
-    public function update()
+    public function update(Request $request)
     {
-        $result = Student::where("id", $this->post->get("id"))->update($this->post->all());
+        $result = Student::where("id", $request->request->get('id'))->update($request->request->all());
 
         if ($result) {
-            header("location: index");
+            return redirect("/index");
         }
     }
 
-    public function delete()
+    public function destroy($id)
     {
-        $result = Student::destroy($this->query->get("id"));
+        $result = Student::destroy($id);
 
         if ($result) {
-            header("location: index");
+            return redirect("/index");
         }
 
     }

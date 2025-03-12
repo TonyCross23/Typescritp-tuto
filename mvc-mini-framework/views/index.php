@@ -32,9 +32,9 @@
               <td><?php echo $student->name; ?></td>
               <td><?php echo $student->email; ?></td>
               <td>
-                <a href="/show?id=<?php echo $student->id; ?>" class="btn btn-primary btn-sm">View</a>
-                <a href="/edit?id=<?php echo $student->id; ?>" class="btn btn-success btn-sm">Edit</a>
-                <a href="/destroy?id=<?php echo $student->id; ?>" class="btn btn-danger btn-sm">Delete</a>
+                <a href="/show/<?php echo $student->id; ?>" class="btn btn-primary btn-sm">View</a>
+                <a href="/edit/<?php echo $student->id; ?>" class="btn btn-success btn-sm">Edit</a>
+                <a href="/destroy/<?php echo $student->id; ?>" class="btn btn-danger btn-sm">Delete</a>
               </td>
             </tr>
             <?php endforeach; ?>

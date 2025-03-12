@@ -40,7 +40,10 @@
               <option value="female"                                     <?php if ($student->gender == "female") {echo "selected";}?>>Female</option>
             </select>
           </div>
-          <button type="submit" class="btn btn-primary w-100">Edit</button>
+          <div class="d-flex">
+            <button type="submit" class="btn btn-primary btn-sm mx-1">Edit</button>
+            <a class="btn btn-danger btn-sm" href="/index">Cancel</a>
+          </div>
         </form>
         <?php else: ?>
         <p>student not found</p>

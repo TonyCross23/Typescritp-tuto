@@ -22,8 +22,8 @@
         <p>gender:                   <?php echo $student->gender; ?></p>
         <?php endif; ?>
         <div class="flex">
-          <a href="/edit?id=<?php echo $student->id ?>" class="btn btn-info">Edit</a>
-          <a href="/destroy?id=<?php echo $student->id ?>" class="btn btn-danger">Delete</a>
+          <a href="/edit/<?php echo $student->id ?>" class="btn btn-info">Edit</a>
+          <a href="/destroy/<?php echo $student->id ?>" class="btn btn-danger">Delete</a>
         </div>
       </div>
     </div>
