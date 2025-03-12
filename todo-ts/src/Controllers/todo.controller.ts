@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { TodoSchemaValidation } from "../Models/todo";
 import { todoServices } from "../Services/ todo.service";
-import { date } from "joi";
 
 class todoController {
   //add todo controller
