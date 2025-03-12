@@ -15,6 +15,15 @@ class HomeController
     }
 }
 
+class TestController
+{
+    public function index()
+    {
+        echo "Test";
+    }
+
+}
+
 function notFound()
 {
     echo "not found page";
@@ -23,6 +32,7 @@ function notFound()
 $routes = [
     '/index'  => [HomeController::class, 'index'],
     '/create' => [HomeController::class, 'create'],
+    '/test'   => [TestController::class, 'index'],
 ];
 
 $route = $_SERVER['PATH_INFO'];
