@@ -17,7 +17,7 @@ class StudentController
     public function index()
     {
         $students = Student::get();
-        view('index.php', ["students" => $students]);
+        return view('index.php', ["students" => $students]);
     }
 
     public function create()
